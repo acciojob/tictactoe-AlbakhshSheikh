@@ -5,6 +5,7 @@ body {
   padding: 20px;
 }
 
+
 .container {
   max-width: 400px;
   margin: auto;
@@ -44,24 +45,26 @@ h1 {
   font-size: 1.2em;
 }
 
-.board {
+#board {
   display: grid;
-  grid-template-columns: repeat(3, 80px);
-  grid-template-rows: repeat(3, 80px);
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
   gap: 5px;
-  justify-content: center;
+  margin-top: 20px;
 }
 
 .cell {
+  width: 100px;
+  height: 100px;
   background-color: pink;
+  border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 2rem;
   cursor: pointer;
-  border: 1px solid black;
 }
+
 
 .cell.winning {
   background-color: purple;
