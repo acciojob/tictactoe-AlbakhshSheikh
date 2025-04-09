@@ -1,41 +1,69 @@
 body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
 
-    .container {
-      text-align: center;
-    }
+.container {
+  max-width: 400px;
+  margin: auto;
+}
 
-    .board {
-      display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-gap: 5px;
-      margin: 20px auto;
-    }
+h1 {
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
 
-    .cell {
-      width: 100px;
-      height: 100px;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2em;
-      cursor: pointer;
-      border: 2px solid #333;
-    }
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-    .hidden {
-      display: none;
-    }
+.input-section input {
+  padding: 5px;
+  font-size: 1em;
+  width: 200px;
+}
 
-    .message {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
+.input-section button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 5px;
+  justify-content: center;
+}
+
+.cell {
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.cell.winning {
+  background-color: purple;
+  color: white;
+}
