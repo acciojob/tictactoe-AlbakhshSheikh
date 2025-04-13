@@ -1,4 +1,4 @@
-let currentPlayer = 'X';
+let currentPlayer = 'x';
 let player1 = '';
 let player2 = '';
 let board = ['', '', '', '', '', '', '', '', ''];
@@ -21,7 +21,7 @@ function updateMessage(winner = null) {
   if (winner) {
     messageDiv.textContent = `${winner}, congratulations you won!`;
   } else {
-    const player = currentPlayer === 'X' ? player1 : player2;
+    const player = currentPlayer === 'x' ? player1 : player2;
     messageDiv.textContent = `${player}, you're up`;
   }
 }
@@ -45,14 +45,14 @@ function handleMove(index) {
   cell.textContent = currentPlayer;
 
   if (checkWin()) {
-    const winner = currentPlayer === 'X' ? player1 : player2;
+    const winner = currentPlayer === 'x' ? player1 : player2;
     updateMessage(winner);
     highlightWinningCells();
     gameOver = true;
     return;
   }
 
-  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  currentPlayer = currentPlayer === 'x' ? 'o' : 'x';
   updateMessage();
 }
 
