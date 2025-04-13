@@ -1,75 +1,74 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Comic Sans MS', cursive;
   text-align: center;
-  margin: 0;
-  padding: 20px;
+  background-color: #fff;
 }
-
-.game {
-  min-height: 300px; /* or whatever height suits */
-}
-
 
 .container {
-  max-width: 400px;
-  margin: auto;
+  margin-top: 50px;
 }
 
-h1 {
-  font-family: 'Comic Sans MS', cursive;
-  font-size: 2em;
-  margin-bottom: 20px;
+.title {
+  font-size: 36px;
+  font-weight: bold;
 }
 
-.input-section {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.input-group {
+  margin: 10px;
 }
 
-.input-section input {
-  padding: 5px;
-  font-size: 1em;
-  width: 200px;
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
-.input-section button {
-  margin-top: 10px;
+input[type="text"] {
   padding: 10px;
-  font-size: 1em;
+  font-size: 16px;
+  width: 200px;
+  text-align: center;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 18px;
+  border: 2px solid black;
+  background-color: white;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-.hidden {
-  display: none;
+button:hover {
+  background-color: #eee;
 }
 
-.message {
-  margin: 20px 0;
-  font-size: 1.2em;
-}
-
-board {
+/* Existing board styling */
+.board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+  grid-gap: 5px;
+  justify-content: center;
   margin-top: 20px;
 }
 
-.cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: pink;
-  border: 2px solid black;
+.board div {
   width: 100px;
   height: 100px;
+  background-color: pink;
+  font-size: 48px;
+  line-height: 100px;
+  cursor: pointer;
+  border: 1px solid black;
 }
 
-
-
-.cell.winning {
+.board .win {
   background-color: purple;
   color: white;
+}
+
+.message {
+  font-size: 20px;
+  margin: 15px;
 }

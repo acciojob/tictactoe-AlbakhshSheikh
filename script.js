@@ -1,63 +1,81 @@
-const startButton = document.getElementById("submit");
-const inputSection = document.getElementById("input-section");
-const gameSection = document.querySelector(".game");
-const message = document.querySelector(".message");
-const board = document.getElementById("board");
-const cells = document.querySelectorAll(".cell");
-
-let currentPlayer = "";
-let player1 = "";
-let player2 = "";
-let turn = 0; // 0 = player1 (X), 1 = player2 (O)
+let currentPlayer = 'X';
+let player1 = '';
+let player2 = '';
+let board = ['', '', '', '', '', '', '', '', ''];
 let gameOver = false;
 
-const winCombos = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-  [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-  [0, 4, 8], [2, 4, 6]             // diagonals
-];
-
-startButton.addEventListener("click", () => {
-  player1 = document.getElementById("player1").value.trim();
-  player2 = document.getElementById("player2").value.trim();
+document.getElementById('submit').addEventListener('click', () => {
+  player1 = document.getElementById('player-1').value;
+  player2 = document.getElementById('player-2').value;
 
   if (player1 && player2) {
-    currentPlayer = player1;
-    inputSection.classList.add("hidden");
-    gameSection.classList.remove("hidden");
-    message.textContent = `${currentPlayer}, you're up`;
-  } else {
-    alert("Please enter names for both players!");
+    document.getElementById('player-input').style.display = 'none';
+    document.getElementById('game').style.display = 'block';
+    updateMessage();
+    createBoard();
   }
 });
 
-cells.forEach((cell, index) => {
-  cell.addEventListener("click", () => {
-    if (cell.textContent !== "" || gameOver) return;
+function updateMessage(winner = null) {
+  const messageDiv = document.querySelector('.message');
+  if (winner) {
+    messageDiv.textContent = `${winner}, congratulations you won!`;
+  } else {
+    const player = currentPlayer === 'X' ? player1 : player2;
+    messageDiv.textContent = `${player}, you're up`;
+  }
+}
 
-    const mark = turn % 2 === 0 ? "X" : "O";
-    cell.textContent = mark;
+function createBoard() {
+  const boardDiv = document.querySelector('.board');
+  boardDiv.innerHTML = '';
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('div');
+    cell.id = i + 1;
+    cell.addEventListener('click', () => handleMove(i));
+    boardDiv.appendChild(cell);
+  }
+}
 
-    if (checkWin(mark)) {
-      gameOver = true;
-      message.textContent = `${currentPlayer}, congratulations you won!`;
-    } else if (turn === 8) {
-      gameOver = true;
-      message.textContent = "It's a draw!";
-    } else {
-      turn++;
-      currentPlayer = turn % 2 === 0 ? player1 : player2;
-      message.textContent = `${currentPlayer}, you're up`;
-    }
+function handleMove(index) {
+  if (board[index] !== '' || gameOver) return;
+
+  board[index] = currentPlayer;
+  const cell = document.getElementById(index + 1);
+  cell.textContent = currentPlayer;
+
+  if (checkWin()) {
+    const winner = currentPlayer === 'X' ? player1 : player2;
+    updateMessage(winner);
+    highlightWinningCells();
+    gameOver = true;
+    return;
+  }
+
+  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  updateMessage();
+}
+
+const winPatterns = [
+  [0,1,2], [3,4,5], [6,7,8], // rows
+  [0,3,6], [1,4,7], [2,5,8], // cols
+  [0,4,8], [2,4,6]           // diags
+];
+
+function checkWin() {
+  return winPatterns.some(pattern => {
+    const [a, b, c] = pattern;
+    return board[a] && board[a] === board[b] && board[b] === board[c];
   });
-});
+}
 
-function checkWin(mark) {
-  return winCombos.some(combo => {
-    const win = combo.every(index => cells[index].textContent === mark);
-    if (win) {
-      combo.forEach(index => cells[index].classList.add("winning"));
+function highlightWinningCells() {
+  for (let pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+      document.getElementById(a + 1).classList.add('win');
+      document.getElementById(b + 1).classList.add('win');
+      document.getElementById(c + 1).classList.add('win');
     }
-    return win;
-  });
+  }
 }

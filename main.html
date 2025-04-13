@@ -3,33 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Tic Tac Toe</h1>
+    <h1 class="title">Tic Tac Toe</h1>
 
-    <!-- Player input form -->
-    <div class="input-section" id="input-section">
-      <label>Player 1 <input type="text" id="player1" placeholder="enter name" /></label>
-      <label>Player 2 <input type="text" id="player2" placeholder="enter name" /></label>
+    <!-- Start Page -->
+    <div id="player-input">
+      <div class="input-group">
+        <label for="player-1">Player 1</label>
+        <input type="text" id="player-1" placeholder="enter name">
+      </div>
+      <div class="input-group">
+        <label for="player-2">Player 2</label>
+        <input type="text" id="player-2" placeholder="enter name">
+      </div>
       <button id="submit">Start Game</button>
     </div>
 
-    <!-- Game Section -->
-    <div class="game hidden">
+    <!-- Game Area -->
+    <div id="game" style="display: none;">
+      <h1 class="title">Tic Tac Toe</h1>
       <div class="message"></div>
-      <div class="board" id="board">
-        <div class="cell" id="1"></div>
-        <div class="cell" id="2"></div>
-        <div class="cell" id="3"></div>
-        <div class="cell" id="4"></div>
-        <div class="cell" id="5"></div>
-        <div class="cell" id="6"></div>
-        <div class="cell" id="7"></div>
-        <div class="cell" id="8"></div>
-        <div class="cell" id="9"></div>
-      </div>
+      <div class="board"></div>
     </div>
   </div>
 
