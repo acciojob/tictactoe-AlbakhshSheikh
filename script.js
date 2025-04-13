@@ -19,7 +19,7 @@ document.getElementById('submit').addEventListener('click', () => {
 function updateMessage(winner = null) {
   const messageDiv = document.querySelector('.message');
   if (winner) {
-    messageDiv.textContent = `${winner}, congratulations you won!`;
+    messageDiv.textContent = `${winner} congratulations you won!`;
   } else {
     const player = currentPlayer === 'x' ? player1 : player2;
     messageDiv.textContent = `${player}, you're up`;
@@ -44,10 +44,11 @@ function handleMove(index) {
   const cell = document.getElementById(index + 1);
   cell.textContent = currentPlayer;
 
-  if (checkWin()) {
+  const winningPattern = checkWin();
+  if (winningPattern) {
     const winner = currentPlayer === 'x' ? player1 : player2;
     updateMessage(winner);
-    highlightWinningCells();
+    highlightWinningCells(winningPattern); // pass pattern directly
     gameOver = true;
     return;
   }
@@ -56,6 +57,7 @@ function handleMove(index) {
   updateMessage();
 }
 
+
 const winPatterns = [
   [0,1,2], [3,4,5], [6,7,8], // rows
   [0,3,6], [1,4,7], [2,5,8], // cols
@@ -63,19 +65,19 @@ const winPatterns = [
 ];
 
 function checkWin() {
-  return winPatterns.some(pattern => {
-    const [a, b, c] = pattern;
-    return board[a] && board[a] === board[b] && board[b] === board[c];
-  });
-}
-
-function highlightWinningCells() {
   for (let pattern of winPatterns) {
     const [a, b, c] = pattern;
     if (board[a] && board[a] === board[b] && board[b] === board[c]) {
-      document.getElementById(a + 1).classList.add('win');
-      document.getElementById(b + 1).classList.add('win');
-      document.getElementById(c + 1).classList.add('win');
+      return pattern; // return the winning pattern
     }
   }
+  return null;
 }
+
+
+function highlightWinningCells(pattern) {
+  for (let index of pattern) {
+    document.getElementById(index + 1).classList.add('win');
+  }
+}
+
